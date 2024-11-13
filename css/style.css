@@ -17,10 +17,10 @@ body {
 
 .window {
     position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 400px;
-    height: 400px;
+    top: 70%;
+    left: 26%;
+    width: 200px;
+    height: 200px;
     border: 1px solid #000;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 100;
@@ -28,7 +28,7 @@ body {
 }
 
 .window-header {
-    background-color: #ccc;
+    background-color: #c54848;
     padding: 5px;
     cursor: move;
     display: flex;
@@ -73,10 +73,12 @@ body {
 .button-group {
     display: flex;
     gap: 5px;
+    cursor: pointer;
 }
 
 button {
     cursor: pointer;
+    width: 20px;
 }
 
 .main-house {
@@ -87,48 +89,177 @@ button {
 }
 
 .main-structure {
-    position: absolute;
-    top: 73%;
+    position: relative;
+    top: 70%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 55%;
     height: 50%;
-    background-color: rgb(206, 68, 121);
+    background: linear-gradient(90deg, rgb(231, 74, 137) 0%, rgb(247, 133, 133) 74%, rgb(248, 184, 184) 100%);
     z-index: 1;
 }
 
 .center-structure {
     position: absolute;
-    top: 58%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 25%;
-    height: 80%;
-    background-color:rgb(231, 170, 79);
+    width: 20%;
+    height: 91%;
+    background: linear-gradient(0deg, rgb(247, 133, 133) 0%, rgb(245, 86, 150) 100%);
     z-index: 3;
-    clip-path: polygon(50% 0%, 100% 15%, 100% 100%, 0% 100%, 0% 15%);
+    clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
 }
 
 .main-roof {
     position: absolute;
     top: -70%;
     left: 50%;
+    background-image:url(../textures/brick.png);
+    background-size: 60%;
     transform: translateX(-50%);
     width: 110%;
     height: 70%;
-    background-color:rgb(104, 188, 209);
     z-index: 2;
     clip-path:polygon(0 100%, 100% 100%, 90% 0, 10% 0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 15px 30px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.main-roof::after { 
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(95, 78, 78, 0.192); 
+    z-index: -1;  
 }
 
 .center-roof {
     position: absolute;
-    top: -50%;
+    top: -5%;
     left: 50%;
     transform: translateX(-50%);
-    width: 110%;
+    width: 40%;
     height: 40%;
-    background-color:aqua;
-    z-index: 3;
-    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    background-image:url(../textures/brick.png);
+    background-size: 80%;
+    z-index: 4;
+    clip-path: polygon(15% 100%, 50% 0%, 85% 100%, 75% 100%, 50% 24%, 25% 100%);
+}
+
+.door1, .door2 {
+    background-image: url(../textures/wood2.jpg);
+    cursor: pointer;
+}
+
+.door1 {
+  transform-origin: left;
+  transition: all 0.5s ease-in-out;
+  position:absolute;
+  top:0px;
+  right:50%;
+  width:100px;
+  height:200px;
+  z-index: 1000;
+}
+
+.door1::before { /* vine */
+    position: absolute;
+    content: '';
+    background-image: url(../textures/vine.png);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 310px;
+    z-index: 1005;
+    top: 52%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.door1::after, .door2::after { /* door windows */
+    content: '';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 80%;
+    position: absolute;
+    /* background-color: white; */
+    z-index: 5;
+    /* border-radius: 90% 90% 0 0; */
+    background-image: url(../textures/glass.avif);
+    border: 5px solid rgb(117, 60, 34);
+}
+
+ .door1 .design1 { 
+    content: '';
+    bottom: 5%;
+    left: 50%;
+    z-index: 1001;
+    background-color: rgb(117, 60, 34);
+    transform: translateX(-50%);
+    height: 90%;
+    width: 5px;
+    position: absolute;
+} 
+
+ .door2 .design2 {
+    content: '';
+    bottom: 5%;
+    left: 50%;
+    z-index: 10;
+    background-color: rgb(117, 60, 34);
+    transform: translateX(-50%);
+    height: 90%;
+    width: 5px;
+    position: absolute;
+} 
+
+.door1 .design1::after {
+    content: '';
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    width: 5px;
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background-color: rgb(117, 60, 34);
+    z-index: 1001;
+} 
+
+.door2 .design2::after {
+    content: '';
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    width: 5px;
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background-color: rgb(117, 60, 34);
+    z-index: 1001;
+} 
+
+.door2 {
+    position:absolute;
+    top:0px;
+    left:50%;
+    width:100px;
+    height:200px;
+    transform-origin: right;
+    transition: all 0.5s ease-in-out;
+    z-index: 1;
+}
+
+.doorOpen1 {
+    transform: perspective(1200px) translateZ(0px) translateX(0px) translateY(0px) rotateY(-105deg);
+    z-index: 1000;
+}
+
+.doorOpen2 {
+    transform: perspective(1200px) translateZ(0px) translateX(0px) translateY(0px) rotateY(105deg);
+    z-index: 1000;
 }

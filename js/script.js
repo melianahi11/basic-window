@@ -4,6 +4,19 @@ function main() {
     dragHer();
     resizeHer();
     buttonHer();
+    openHer();
+}
+
+function toggleDoorsVisibility(show) {
+    const door1 = document.querySelector('.door1');
+    const door2 = document.querySelector('.door2');
+    if (show) {
+        door1.style.display = 'block';
+        door2.style.display = 'block';
+    } else {
+        door1.style.display = 'none';
+        door2.style.display = 'none';
+    }
 }
 
 function dragHer() {
@@ -54,6 +67,7 @@ function resizeHer() {
         handleType = e.target.classList[1];
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', stopResize);
+        toggleDoorsVisibility(false);
     }
 
     function resize(e) {
@@ -119,7 +133,7 @@ function buttonHer() {
     let ogTop = windowElement.style.top;
 
     miniButton.addEventListener('click', function() {
-        if (windowElement.style.width === '100vw' && windowElement.style.height === '100vh') {
+        if (windowElement.style.width === '100vw' && windowElement.style.height === '100vh' || windowElement.style.width > ogWidth || windowElement.style.height > ogHeight) {
             windowElement.style.width = ogWidth;
             windowElement.style.height = ogHeight;
             windowElement.style.left = ogLeft;
@@ -128,6 +142,7 @@ function buttonHer() {
             if (content) {
                 content.style.display = 'block';
             }
+            toggleDoorsVisibility(true);
         }
     });
 
@@ -141,6 +156,7 @@ function buttonHer() {
             if (content) {
                 content.style.display = 'block';
             }
+            toggleDoorsVisibility(false);
         }
     });
 
@@ -157,5 +173,24 @@ function buttonHer() {
             header.style.display = 'flex';
         }
         windowElement.style.display = 'block';
+        toggleDoorsVisibility(false);
     });
+}
+
+function openHer() {
+    var doors = document.querySelector(".doors");
+    var door1 = document.querySelector(".door1");
+    var door2 = document.querySelector(".door2");
+
+    doors.addEventListener("click", function(event) {
+        if (event.target.classList.contains('door1') || event.target.classList.contains('door2')) {
+            toggleDoors();
+        }
+    });
+    
+    function toggleDoors() {
+      console.log('Toggle doors function called');
+      door1.classList.toggle("doorOpen1");
+      door2.classList.toggle("doorOpen2");
+    }
 }
