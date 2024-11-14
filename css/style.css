@@ -17,8 +17,6 @@ body {
 
 .window {
     position: absolute;
-    top: 70%;
-    left: 26%;
     width: 200px;
     height: 200px;
     border: 1px solid #000;
@@ -27,8 +25,31 @@ body {
     background-color: white;
 }
 
+#window1 {top: 20%; left: 20%;}
+#window2 {top: 20%; left: 50%;}
+#window3 {top: 20%; left: 80%;}
+
+#window2 {
+    position: absolute;
+    top: 20%; 
+    left: 50%;
+    border-radius: 200px 200px 0 0;
+    overflow:hidden;
+    width: 230px;
+    height: 230px;
+}
+
+#window-header2 {
+    position: absolute;
+    width: 96%;
+    bottom: 0;
+    display:flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
 .window-header {
-    background-color: #c54848;
+    background-image: url(../textures/wood2.jpg);
     padding: 5px;
     cursor: move;
     display: flex;
@@ -115,14 +136,14 @@ button {
     position: absolute;
     top: -70%;
     left: 50%;
-    background-image:url(../textures/brick.png);
-    background-size: 60%;
+    background-image:url(../textures/roof3.png);
+    background-size: 31%;
     transform: translateX(-50%);
     width: 110%;
     height: 70%;
     z-index: 2;
     clip-path:polygon(0 100%, 100% 100%, 90% 0, 10% 0);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 15px 30px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.651), 0 15px 30px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.3);
     z-index: 3;
 }
 
@@ -133,7 +154,7 @@ button {
     left: 0; 
     width: 100%; 
     height: 100%; 
-    background-color: rgba(95, 78, 78, 0.192); 
+    background-color: rgba(50, 45, 45, 0.578); 
     z-index: -1;  
 }
 
@@ -144,8 +165,8 @@ button {
     transform: translateX(-50%);
     width: 40%;
     height: 40%;
-    background-image:url(../textures/brick.png);
-    background-size: 80%;
+    background-image:url(../textures/roof3.png);
+    background-size: 62%;
     z-index: 4;
     clip-path: polygon(15% 100%, 50% 0%, 85% 100%, 75% 100%, 50% 24%, 25% 100%);
 }
@@ -159,10 +180,10 @@ button {
   transform-origin: left;
   transition: all 0.5s ease-in-out;
   position:absolute;
-  top:0px;
+  bottom:0px;
   right:50%;
   width:100px;
-  height:200px;
+  height:175px;
   z-index: 1000;
 }
 
@@ -245,10 +266,10 @@ button {
 
 .door2 {
     position:absolute;
-    top:0px;
+    bottom:0px;
     left:50%;
     width:100px;
-    height:200px;
+    height:175px;
     transform-origin: right;
     transition: all 0.5s ease-in-out;
     z-index: 1;

@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
-    dragHer();
-    resizeHer();
-    buttonHer();
+    document.querySelectorAll('.window').forEach(windowElement => {
+        dragHer(windowElement);
+        resizeHer(windowElement);
+        buttonHer(windowElement);
+    });
     openHer();
 }
 
 function toggleDoorsVisibility(show) {
-    const door1 = document.querySelector('.door1');
-    const door2 = document.querySelector('.door2');
+    const door1 = document.querySelector('#window1 .door1');
+    const door2 = document.querySelector('#window1 .door2');
     if (show) {
         door1.style.display = 'block';
         door2.style.display = 'block';
@@ -19,9 +21,8 @@ function toggleDoorsVisibility(show) {
     }
 }
 
-function dragHer() {
-    const windowElement = document.querySelector('.window');
-    const windowDrag = document.getElementById('window-header');
+function dragHer(windowElement) {
+    const windowDrag = windowElement.querySelector('.window-header');
     let isDragging = false;
     let offsetX, offsetY;
 
@@ -30,26 +31,29 @@ function dragHer() {
         offsetX = e.clientX - windowDrag.getBoundingClientRect().left;
         offsetY = e.clientY - windowDrag.getBoundingClientRect().top;
         windowElement.style.zIndex = '1000';
+        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
     });
 
     document.addEventListener('mousemove', function(e) {
         if(isDragging) {
             windowElement.style.left = `${e.clientX - offsetX}px`;
             windowElement.style.top = `${e.clientY - offsetY}px`;
+            windowElement.style.zIndex = '1000';
+            if (windowElement.id === 'window1') toggleDoorsVisibility(true);
         }
     });
 
     document.addEventListener('mouseup', function(e) {
         if(isDragging) {
             isDragging = false;
-            windowElement.style.zIndex = '';
+            windowElement.style.zIndex = '1000';
+            if (windowElement.id === 'window1') toggleDoorsVisibility(true);
         }
     });
 }
 
-function resizeHer() {
-    const windowElement = document.querySelector('.window');
-    const resizeHandles = document.querySelectorAll('.resize-handle');
+function resizeHer(windowElement) {
+    const resizeHandles = windowElement.querySelectorAll('.resize-handle');
 
     resizeHandles.forEach(handle => {
         handle.addEventListener('mousedown', initResize);
@@ -67,7 +71,7 @@ function resizeHer() {
         handleType = e.target.classList[1];
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', stopResize);
-        toggleDoorsVisibility(false);
+        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
     }
 
     function resize(e) {
@@ -100,7 +104,6 @@ function resizeHer() {
                     }
                     if (newHeight >= 200) {
                         windowElement.style.top = e.clientY + 'px';
-
                     }
                     break; 
             }
@@ -118,11 +121,11 @@ function resizeHer() {
         isResizing = false;
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
+        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
     }
 }
 
-function buttonHer() {
-    const windowElement = document.querySelector('.window');
+function buttonHer(windowElement) {
     const miniButton = windowElement.querySelector('.mini');
     const maxiButton = windowElement.querySelector('.maxi');
     const exitButton = windowElement.querySelector('.exit');
@@ -142,7 +145,7 @@ function buttonHer() {
             if (content) {
                 content.style.display = 'block';
             }
-            toggleDoorsVisibility(true);
+            if (windowElement.id === 'window1') toggleDoorsVisibility(true);
         }
     });
 
@@ -156,7 +159,7 @@ function buttonHer() {
             if (content) {
                 content.style.display = 'block';
             }
-            toggleDoorsVisibility(false);
+            if (windowElement.id === 'window1') toggleDoorsVisibility(false);
         }
     });
 
@@ -173,7 +176,7 @@ function buttonHer() {
             header.style.display = 'flex';
         }
         windowElement.style.display = 'block';
-        toggleDoorsVisibility(false);
+        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
     });
 }
 
