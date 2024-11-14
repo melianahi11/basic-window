@@ -5,13 +5,13 @@ function main() {
         dragHer(windowElement);
         resizeHer(windowElement);
         buttonHer(windowElement);
+        openHer(windowElement); 
     });
-    openHer();
 }
 
-function toggleDoorsVisibility(show) {
-    const door1 = document.querySelector('#window1 .door1');
-    const door2 = document.querySelector('#window1 .door2');
+function toggleDoorsVisibility(show, windowElement) {
+    const door1 = windowElement.querySelector('.door1');
+    const door2 = windowElement.querySelector('.door2');
     if (show) {
         door1.style.display = 'block';
         door2.style.display = 'block';
@@ -26,28 +26,28 @@ function dragHer(windowElement) {
     let isDragging = false;
     let offsetX, offsetY;
 
-    windowDrag.addEventListener('mousedown', function(e) {
+    windowDrag.addEventListener('mousedown', function (e) {
         isDragging = true;
         offsetX = e.clientX - windowElement.getBoundingClientRect().left;
         offsetY = e.clientY - windowElement.getBoundingClientRect().top;
         windowElement.style.zIndex = '1000';
-        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
+        toggleDoorsVisibility(true, windowElement); 
     });
 
-    document.addEventListener('mousemove', function(e) {
-        if(isDragging) {
+    document.addEventListener('mousemove', function (e) {
+        if (isDragging) {
             windowElement.style.left = `${e.clientX - offsetX}px`;
             windowElement.style.top = `${e.clientY - offsetY}px`;
             windowElement.style.zIndex = '1000';
-            if (windowElement.id === 'window1') toggleDoorsVisibility(true);
+            toggleDoorsVisibility(true, windowElement); 
         }
     });
 
-    document.addEventListener('mouseup', function(e) {
-        if(isDragging) {
+    document.addEventListener('mouseup', function (e) {
+        if (isDragging) {
             isDragging = false;
             windowElement.style.zIndex = '1000';
-            if (windowElement.id === 'window1') toggleDoorsVisibility(true);
+            toggleDoorsVisibility(true, windowElement); 
         }
     });
 }
@@ -71,13 +71,13 @@ function resizeHer(windowElement) {
         handleType = e.target.classList[1];
         document.addEventListener('mousemove', resize);
         document.addEventListener('mouseup', stopResize);
-        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
+        toggleDoorsVisibility(false, windowElement); 
     }
 
     function resize(e) {
         if (isResizing) {
             let newWidth, newHeight;
-            switch(handleType) {
+            switch (handleType) {
                 case 'bottom-right':
                     newWidth = startWidth + e.clientX - startX;
                     newHeight = startHeight + e.clientY - startY;
@@ -105,7 +105,7 @@ function resizeHer(windowElement) {
                     if (newHeight >= 200) {
                         windowElement.style.top = e.clientY + 'px';
                     }
-                    break; 
+                    break;
             }
 
             if (newWidth >= 200) {
@@ -121,7 +121,7 @@ function resizeHer(windowElement) {
         isResizing = false;
         document.removeEventListener('mousemove', resize);
         document.removeEventListener('mouseup', stopResize);
-        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
+        toggleDoorsVisibility(false, windowElement); 
     }
 }
 
@@ -135,7 +135,7 @@ function buttonHer(windowElement) {
     let ogLeft = windowElement.style.left;
     let ogTop = windowElement.style.top;
 
-    miniButton.addEventListener('click', function() {
+    miniButton.addEventListener('click', function () {
         if (windowElement.style.width === '100vw' && windowElement.style.height === '100vh' || windowElement.style.width > ogWidth || windowElement.style.height > ogHeight) {
             windowElement.style.width = ogWidth;
             windowElement.style.height = ogHeight;
@@ -145,12 +145,12 @@ function buttonHer(windowElement) {
             if (content) {
                 content.style.display = 'block';
             }
-            if (windowElement.id === 'window1') toggleDoorsVisibility(true);
+            toggleDoorsVisibility(true, windowElement); 
         }
     });
 
-    maxiButton.addEventListener('click', function() {
-        if (windowElement.style.width != '100vw' && windowElement.style.height != '100vh') {
+    maxiButton.addEventListener('click', function () {
+        if (windowElement.style.width !== '100vw' && windowElement.style.height !== '100vh') {
             windowElement.style.width = '100vw';
             windowElement.style.height = '100vh';
             windowElement.style.left = '0';
@@ -159,11 +159,11 @@ function buttonHer(windowElement) {
             if (content) {
                 content.style.display = 'block';
             }
-            if (windowElement.id === 'window1') toggleDoorsVisibility(false);
+            toggleDoorsVisibility(false, windowElement); 
         }
     });
 
-    exitButton.addEventListener('click', function() {
+    exitButton.addEventListener('click', function () {
         windowElement.style.width = ogWidth;
         windowElement.style.height = '30px';
         const content = windowElement.querySelector('.window-content');
@@ -172,28 +172,27 @@ function buttonHer(windowElement) {
         }
 
         const header = windowElement.querySelector('.window-header');
-        if(header) {
+        if (header) {
             header.style.display = 'flex';
         }
         windowElement.style.display = 'block';
-        if (windowElement.id === 'window1') toggleDoorsVisibility(false);
+        toggleDoorsVisibility(false, windowElement); 
     });
 }
 
-function openHer() {
-    var doors = document.querySelector(".doors");
-    var door1 = document.querySelector(".door1");
-    var door2 = document.querySelector(".door2");
+function openHer(windowElement) {
+    const doors = windowElement.querySelector(".doors");
+    const door1 = doors.querySelector(".door1");
+    const door2 = doors.querySelector(".door2");
 
-    doors.addEventListener("click", function(event) {
+    doors.addEventListener("click", function (event) {
         if (event.target.classList.contains('door1') || event.target.classList.contains('door2')) {
             toggleDoors();
         }
     });
-    
+
     function toggleDoors() {
-      console.log('Toggle doors function called');
-      door1.classList.toggle("doorOpen1");
-      door2.classList.toggle("doorOpen2");
+        door1.classList.toggle("doorOpen1");
+        door2.classList.toggle("doorOpen2");
     }
 }

@@ -34,7 +34,7 @@ body {
     top: 20%; 
     left: 50%;
     border-radius: 200px 200px 0 0;
-    overflow:hidden;
+    /* overflow:hidden; */
     width: 230px;
     height: 230px;
 }
@@ -46,6 +46,7 @@ body {
     display:flex;
     justify-content: space-between;
     padding: 5px;
+    overflow: hidden;
 }
 
 .window-header {
@@ -54,6 +55,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-image: url(../textures/brick.png);
+    z-index: 1010;
 }
 
 .window-content {
@@ -220,7 +222,7 @@ button {
     border: 5px solid rgb(117, 60, 34);
 }
 
- .door1 .design1 { 
+ .door1 .design1 { /* stick vertical */
     content: '';
     bottom: 5%;
     left: 50%;
@@ -244,7 +246,7 @@ button {
     position: absolute;
 } 
 
-.door1 .design1::after {
+.door1 .design1::after { /* stick horizontal */
     content: '';
     top: 50%;
     left: 50%;
@@ -278,6 +280,50 @@ button {
     transition: all 0.5s ease-in-out;
     z-index: 1;
 }
+
+#window2 .door1 {
+    border-top-left-radius: 230px;
+    width:50%;
+    height: 90%;
+    top: 0;
+}
+
+#window2 .door2 {
+    border-top-right-radius: 230px;
+    width:50%;
+    height: 90%;
+    top: 0;
+}
+
+#window2 .door1::after {
+    content: '';
+    border-top-left-radius: 230px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 80%;
+    position: absolute;
+    z-index: 5;
+    background-image: url(../textures/glass.avif);
+    border: 5px solid rgb(117, 60, 34);
+}
+
+#window2 .door2::after {
+    content: '';
+    border-top-right-radius: 230px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    width: 80%;
+    position: absolute;
+    z-index: 5;
+    background-image: url(../textures/glass.avif);
+    border: 5px solid rgb(117, 60, 34);
+}
+
+#window2 .door1 .diff, #window2 .door2 .diff {height: 85%;}
 
 .doorOpen1 {
     transform: perspective(1200px) translateZ(0px) translateX(0px) translateY(0px) rotateY(-105deg);
