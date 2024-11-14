@@ -28,8 +28,8 @@ function dragHer(windowElement) {
 
     windowDrag.addEventListener('mousedown', function(e) {
         isDragging = true;
-        offsetX = e.clientX - windowDrag.getBoundingClientRect().left;
-        offsetY = e.clientY - windowDrag.getBoundingClientRect().top;
+        offsetX = e.clientX - windowElement.getBoundingClientRect().left;
+        offsetY = e.clientY - windowElement.getBoundingClientRect().top;
         windowElement.style.zIndex = '1000';
         if (windowElement.id === 'window1') toggleDoorsVisibility(false);
     });

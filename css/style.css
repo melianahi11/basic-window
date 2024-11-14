@@ -41,7 +41,7 @@ body {
 
 #window-header2 {
     position: absolute;
-    width: 96%;
+    width: 100%;
     bottom: 0;
     display:flex;
     justify-content: space-between;
@@ -49,15 +49,19 @@ body {
 }
 
 .window-header {
-    background-image: url(../textures/wood2.jpg);
     padding: 5px;
     cursor: move;
     display: flex;
     justify-content: space-between;
+    background-image: url(../textures/brick.png);
 }
 
 .window-content {
     padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .resize-handle {
@@ -244,7 +248,7 @@ button {
     content: '';
     top: 50%;
     left: 50%;
-    height: 50%;
+    height: 55%;
     width: 5px;
     position: absolute;
     transform: translate(-50%, -50%) rotate(90deg);
@@ -256,7 +260,7 @@ button {
     content: '';
     top: 50%;
     left: 50%;
-    height: 50%;
+    height: 55%;
     width: 5px;
     position: absolute;
     transform: translate(-50%, -50%) rotate(90deg);
